@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusEvents</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🎓 CampusEvents</h1>
+  <div id="userBox">
+    <span id="userName"></span>
+    <button id="loginBtn">Sign in with Google</button>
+    <button id="logoutBtn" hidden>Sign out</button>
+  </div>
+</header>
+
+<main>
+  <section id="organiser" hidden>
+    <h2>Organiser: Add Event</h2>
+    <input id="evTitle" placeholder="Event title">
+    <input id="evDate" type="date">
+    <input id="evVenue" placeholder="Venue">
+    <input id="evSeats" type="number" min="1" placeholder="Seats">
+    <button id="addBtn">Add Event</button>
+  </section>
+
+  <section>
+    <h2>Upcoming Events</h2>
+    <p id="hint">Please sign in to register for events.</p>
+    <div id="events"></div>
+  </section>
+</main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
