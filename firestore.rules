@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOrganiser() {
+      // Must match ORGANISERS in public/firebase-config.js
+      return request.auth != null && request.auth.token.email in ["your-email@gmail.com"];
+    }
+
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isOrganiser();
+    }
+
+    match /registrations/{regId} {
+      allow read: if request.auth != null;
+      // A user can only create/delete their OWN registration (id = eventId_uid)
+      allow create: if request.auth != null
+                    && request.resource.data.uid == request.auth.uid
+                    && regId == request.resource.data.eventId + "_" + request.auth.uid;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+  }
+}
